@@ -1,0 +1,40 @@
+name: CD - Deploy Course API Backend
+
+permissions: write-all
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout branch/tag"
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.PAT }}
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Set short SHA and version environment variables
+        run: |
+          echo "SHORT_SHA=`echo ${{ github.sha }} | cut -c1-8`" >> $GITHUB_ENV
+          echo "VERSION=`echo 0.1.${{ github.run_number }}`" >> $GITHUB_ENV
+      - name: Set build number environment variable
+        run: |
+          echo "BUILD_NUMBER=`echo ${{ env.VERSION }}-${{ env.SHORT_SHA }}`" >> $GITHUB_ENV
+      - name: Setup Java environment
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'maven'
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
+      - name: Build Package Push with Maven version ${{ env.BUILD_NUMBER }}
+        run: mvn -ntp -B clean compile -DskipTests=true -Ddocker.image.tag=${{ env.BUILD_NUMBER }} jib:build
