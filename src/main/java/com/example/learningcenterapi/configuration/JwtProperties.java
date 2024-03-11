@@ -17,4 +17,5 @@ public class JwtProperties {
     public Long getTokenTimeout(boolean isAccessToken) {
         return isAccessToken ? accessTokenExpiration : refreshTokenExpiration;
     }
+    
 }
