@@ -17,9 +17,13 @@
         <java.version>17</java.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.release>21</maven.compiler.release>
         <docker.username>mozarialla</docker.username>
         <docker.image.name>learning-center-api</docker.image.name>
         <docker.image.tag/>
+        <gar_location>europe-central2</gar_location>
+        <project_id>learning-center-api-416902</project_id>
+        <image_name>learning-center-api-416902</image_name>
     </properties>
     <dependencies>
         <dependency>
@@ -220,24 +224,8 @@
                 <artifactId>jib-maven-plugin</artifactId>
                 <version>3.3.1</version>
                 <configuration>
-                    <from>
-                        <image>eclipse-temurin:17</image>
-                        <platforms>
-                            <platform>
-                                <architecture>arm64</architecture>
-                                <os>linux</os>
-                            </platform>
-                            <platform>
-                                <architecture>amd64</architecture>
-                                <os>linux</os>
-                            </platform>
-                        </platforms>
-                    </from>
                     <to>
-                        <image>docker.io/${docker.username}/${docker.image.name}:${docker.image.tag}</image>
-                        <tags>
-                            <tag>latest</tag>
-                        </tags>
+                        <image>${gar_location}-docker.pkg.dev/${project_id}/${image_name}</image>
                     </to>
                 </configuration>
             </plugin>

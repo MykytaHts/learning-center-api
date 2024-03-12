@@ -1,6 +1,6 @@
 package com.example.learningcenterapi.service;
 
-;
+
 import com.example.learningcenterapi.domain.User;
 import com.example.learningcenterapi.domain.enumeration.Role;
 import com.example.learningcenterapi.dto.request.UserRequestDTO;
