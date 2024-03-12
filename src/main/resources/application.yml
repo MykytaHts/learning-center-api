@@ -1,8 +1,13 @@
 spring:
+  cloud:
+    gcp:
+      sql:
+        database-name: postgres
+        instance-connection-name: learning-center-api-416902:europe-central2:course-api-db
+        ip-types: PUBLIC
   datasource:
     username: postgres
     password: admin
-    url: jdbc:postgresql:///postgres
     hikari:
       datasource-properties:
         socketFactory: com.google.cloud.sql.postgres.SocketFactory
