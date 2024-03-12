@@ -53,6 +53,7 @@ env:
   PROJECT_ID: learning-center-api-416902
   GAR_LOCATION: europe-central2
   SERVICE: learning-center-api
+  REPOSITORY: learning-center-repository
   REGION: europe-central2
 
 jobs:
@@ -101,7 +102,7 @@ jobs:
         run: |-
           ./mvnw compile jib:build \
           -Dmaven.compiler.release=17 \
-          -Djib.to.image="${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}"
+          -Djib.to.image="${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE }}:${{ github.sha }}"
       # END - Docker auth and build
 
       - name: Deploy to Cloud Run
@@ -111,7 +112,7 @@ jobs:
           service: ${{ env.SERVICE }}
           region: ${{ env.REGION }}
           # NOTE: If using a pre-built image, update the image name here
-          image: ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}
+          image: ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE }}:${{ github.sha }}
 
       # If required, use the Cloud Run url output in later steps
       - name: Show Output
