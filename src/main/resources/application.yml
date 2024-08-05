@@ -7,7 +7,7 @@ spring:
     hikari:
       datasource-properties:
         socketFactory: com.google.cloud.sql.postgres.SocketFactory
-        cloudSqlInstance: learning-center-api-416902:europe-central2:course-api-db
+        cloudSqlInstance: decisive-unison-430919-k4:europe-central2:learning-center-db
   flyway:
     locations: db.migration
   jpa:

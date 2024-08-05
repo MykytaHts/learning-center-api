@@ -15,7 +15,7 @@ import java.util.List;
 
 import static jakarta.persistence.CascadeType.REMOVE;
 import static jakarta.persistence.FetchType.LAZY;
-import static jakarta.persistence.GenerationType.IDENTITY;
+import static jakarta.persistence.GenerationType.SEQUENCE;
 
 
 @Getter
@@ -30,7 +30,7 @@ public class Lesson extends BaseEntity {
     private final static long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    @GeneratedValue(strategy = SEQUENCE)
     private Long id;
 
     @Size(min = 2, max = 255)

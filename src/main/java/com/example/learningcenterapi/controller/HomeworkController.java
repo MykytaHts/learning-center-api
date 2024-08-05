@@ -56,18 +56,16 @@ public class HomeworkController {
         return ResponseEntity.ok().body(homeworkService.findByUserAndCourseId(user.getId(), courseId));
     }
 
-    /**
-     * Retrieves the homework file for a given homework ID and user ID.
-     *
-     * @param homeworkId The ID of the homework.
-     * @param userId     The ID of the user.
-     * @return The homework file as a byte array.
-     */
+
     @PreAuthorize("hasAnyRole('INSTRUCTOR', 'ADMIN')")
-    @GetMapping("/user/{userId}/homework/{homeworkId}")
-    public byte[] getMyHomework(@PathVariable Long homeworkId, @PathVariable Long userId) {
-        log.info("GET Request to fetch homework file with id {} for user {}", homeworkId, userId);
-        return homeworkService.getHomeworkFile(homeworkId, userId);
+    @GetMapping("/lessons/{lessonId}/students/{studentId}/homework/{homeworkId}")
+    public ResponseEntity<String> getMyHomework(
+            @PathVariable Long lessonId,
+            @PathVariable Long studentId,
+            @PathVariable String homeworkId) {
+        log.info("GET Request to fetch homework file with id {} for user {}", homeworkId, studentId);
+        return ResponseEntity.ok()
+                .body(homeworkService.getHomeworkFile(lessonId, studentId, homeworkId));
     }
 
     /**
@@ -99,8 +97,8 @@ public class HomeworkController {
             @PathVariable Long lessonId,
             @AuthenticationPrincipal User user) throws URISyntaxException {
         log.info("POST Request to submit homework for lesson with id {}", lessonId);
-        HomeworkResponseDTO homeworkDTO = homeworkService.uploadHomeworkFile(file, user, lessonId);
-        return ResponseEntity.created(new URI("/api/v1/homeworks/" + homeworkDTO.getId() + ""))
+        HomeworkResponseDTO homeworkDTO = homeworkService.uploadHomeworkFile(file, user.getId(), lessonId);
+        return ResponseEntity.created(new URI("/api/v1/homeworks/" + homeworkDTO.getId()))
                 .body(homeworkDTO);
     }
 

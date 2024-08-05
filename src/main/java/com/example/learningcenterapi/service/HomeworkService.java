@@ -1,6 +1,5 @@
 package com.example.learningcenterapi.service;
 
-import com.example.learningcenterapi.domain.User;
 import com.example.learningcenterapi.dto.request.HomeworkRequestDTO;
 import com.example.learningcenterapi.dto.response.HomeworkResponseDTO;
 import org.springframework.web.multipart.MultipartFile;
@@ -11,15 +10,17 @@ import java.util.List;
  * Service Interface for managing {@link com.example.learningcenterapi.domain.Homework} entity.
  */
 public interface HomeworkService {
-    /**
-     * Retrieves the homework file for a given homework ID and user ID.
-     *
-     * @param homeworkId The ID of the homework.
-     * @param userId     The ID of the user.
-     * @return The homework file as a byte array.
-     */
-    byte[] getHomeworkFile(Long homeworkId, Long userId);
 
+
+    /**
+     * Retrieves the file link for the homework submission.
+     *
+     * @param lessonId   The ID of the lesson for the homework.
+     * @param studentId  The ID of the student who submitted the homework.
+     * @param identifier The identifier for the homework.
+     * @return The file link for the homework submission.
+     */
+    String getHomeworkFile(Long lessonId, Long studentId, String identifier);
     /**
      * Finds all homework responses for a specific user.
      *
@@ -58,11 +59,11 @@ public interface HomeworkService {
      * Uploads a homework file for a specific lesson and user.
      *
      * @param file The multipart file representing the homework file to be uploaded.
-     * @param user The user who is submitting the homework.
+     * @param studentId The user's id who is submitting the homework.
      * @param lessonId The ID of the lesson the homework is for.
      * @return The response DTO representing the uploaded homework file.
      */
-    HomeworkResponseDTO uploadHomeworkFile(MultipartFile file, User user, Long lessonId);
+    HomeworkResponseDTO uploadHomeworkFile(MultipartFile file, Long studentId, Long lessonId);
 
     /**
      * Deletes a homework by its ID.
