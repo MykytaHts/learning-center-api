@@ -32,8 +32,8 @@ jobs:
         uses: 'google-github-actions/auth@v1'
         with:
           token_format: 'access_token'
-          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
-          service_account: ${{ secrets.SERVICE_ACCOUNT }}
+          workload_identity_provider: projects/614416036074/locations/global/workloadIdentityPools/github/providers/github-actions-provider
+          service_account: my-service-account@decisive-unison-430919-k4.iam.gserviceaccount.com
       - name: Docker Auth
         id: docker-auth
         uses: 'docker/login-action@v1'
