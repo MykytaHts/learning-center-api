@@ -61,7 +61,7 @@ jobs:
           --update-secrets DB_DATABASE_NAME=DB_DATABASE_NAME:latest \
           --update-secrets DB_USERNAME=DB_USERNAME:1 \
           --update-secrets DB_PASSWORD=DB_PASSWORD:1 \
-          --update-secrets DB_CLOUD_SQL_INSTANCE=DB_CLOUD_SQL_INSTANCE:1
+          --update-secrets DB_CLOUD_SQL_INSTANCE=DB_CLOUD_SQL_INSTANCE:1 \
           --allow-unauthenticated
       - name: Show Output
         run: echo ${{ steps.deploy.outputs.url }}
