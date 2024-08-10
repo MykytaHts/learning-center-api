@@ -11,6 +11,8 @@ spring:
       datasource-properties:
         socketFactory: com.google.cloud.sql.postgres.SocketFactory
         cloudSqlInstance: ${DB_CLOUD_SQL_INSTANCE}
+        enableIamAuth: true
+        sslmode: disable
   flyway:
     locations: db.migration
   jpa:

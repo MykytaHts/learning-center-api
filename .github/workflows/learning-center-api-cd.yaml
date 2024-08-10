@@ -59,9 +59,10 @@ jobs:
           --format json \
           --update-env-vars SERVICE_NAME="Learning center" \
           --update-secrets DB_DATABASE_NAME=DB_DATABASE_NAME:latest \
-          --update-secrets DB_USERNAME=DB_USERNAME:latest \
-          --update-secrets DB_PASSWORD=DB_PASSWORD:latest \
-          --update-secrets DB_CLOUD_SQL_INSTANCE=DB_CLOUD_SQL_INSTANCE:latest \
+          --update-secrets DB_USERNAME=DB_USERNAME:3 \
+          --update-secrets DB_PASSWORD=DB_PASSWORD:3 \
+          --update-secrets DB_CLOUD_SQL_INSTANCE=DB_CLOUD_SQL_INSTANCE:1 \
+          --service-account learning-center-api-cloudrun@decisive-unison-430919-k4.iam.gserviceaccount.com \
           --allow-unauthenticated
       - name: Show Output
         run: echo ${{ steps.deploy.outputs.url }}
