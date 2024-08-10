@@ -4,13 +4,13 @@ server:
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    username: postgres
-    password: admin
-    url: jdbc:postgresql:///postgres
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    url: jdbc:postgresql:///${DB_DATABASE_NAME}
     hikari:
       datasource-properties:
         socketFactory: com.google.cloud.sql.postgres.SocketFactory
-        cloudSqlInstance: decisive-unison-430919-k4:europe-central2:learning-center-db
+        cloudSqlInstance: ${DB_CLOUD_SQL_INSTANCE}
   flyway:
     locations: db.migration
   jpa:
