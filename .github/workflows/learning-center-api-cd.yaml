@@ -62,6 +62,7 @@ jobs:
           --update-secrets DB_USERNAME=DB_USERNAME:1 \
           --update-secrets DB_PASSWORD=DB_PASSWORD:1 \
           --update-secrets DB_CLOUD_SQL_INSTANCE=DB_CLOUD_SQL_INSTANCE:1 \
+          --service-account 614416036074-compute@developer.gserviceaccount.com \
           --allow-unauthenticated
       - name: Show Output
         run: echo ${{ steps.deploy.outputs.url }}
