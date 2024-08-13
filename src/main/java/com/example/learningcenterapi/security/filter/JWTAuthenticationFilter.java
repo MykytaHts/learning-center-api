@@ -31,15 +31,14 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(
-            @NonNull final HttpServletRequest request,
-            @NonNull final HttpServletResponse response,
-            @NonNull final FilterChain filterChain
+            @NonNull HttpServletRequest request,
+            @NonNull HttpServletResponse response,
+            @NonNull FilterChain filterChain
     ) throws ServletException, IOException {
         log.debug("Starting JWT authentication process for request: {}", request.getRequestURI());
         String token = extractToken(request);
         try {
             if (token != null && jwtService.isTokenValid(token)) {
-                log.debug("JWT token is valid. Proceeding to extract username.");
                 String username = jwtService.extractUsername(token);
                 log.debug("Extracted username from JWT token: {}", username);
                 authenticateUser(username, request);

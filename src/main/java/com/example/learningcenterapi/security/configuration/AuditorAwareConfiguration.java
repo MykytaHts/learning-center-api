@@ -26,6 +26,6 @@ public class AuditorAwareConfiguration {
                 .filter(details ->
                         details instanceof User && StringUtils.isNotBlank(((User) details).getUsername()))
                 .map(user -> ((User) user).getUsername())
-                .or(() -> Optional.of("Anonymous"));
+                .or(() -> Optional.of("Idk who is that"));
     }
 }

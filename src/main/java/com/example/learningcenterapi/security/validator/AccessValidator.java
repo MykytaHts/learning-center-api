@@ -23,7 +23,6 @@ public class AccessValidator implements Validator {
     private final CourseRepository courseRepository;
     private final FeedbackRepository feedbackRepository;
     private final HomeworkRepository homeworkRepository;
-    private final TestRepository testRepository;
     private final QuestionRepository questionRepository;
 
 
@@ -230,7 +229,8 @@ public class AccessValidator implements Validator {
             return true;
         } else if (Objects.nonNull(studentId) && principal instanceof Student student) {
             if (!studentId.equals(student.getId())) {
-                throw new UserAccessRestrictedException("Student does not have permissions on requested lesson.");
+                throw new UserAccessRestrictedException(
+                        "Student does not have permissions on requested lesson.");
             }
             return true;
         }
@@ -251,7 +251,8 @@ public class AccessValidator implements Validator {
                 .map(Authentication::getPrincipal)
                 .filter(User.class::isInstance)
                 .map(User.class::cast)
-                .orElseThrow(() -> new UserAccessRestrictedException("Current user is not present in Security Context."));
+                .orElseThrow(() -> new UserAccessRestrictedException(
+                        "Current user is not present in Security Context."));
     }
 
     public boolean modificationQuestionAccessById(Long questionId) {

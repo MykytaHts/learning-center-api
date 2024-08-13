@@ -32,18 +32,13 @@ public class ApplicationAuthenticationService {
     private final UserMapper userMapper;
 
     @Transactional
-    public UserResponseDTO register(final RegisterRequestDTO registerRequestDTO) {
+    public UserResponseDTO register(RegisterRequestDTO registerRequestDTO) {
         log.info("Attempting to register user with email {}", registerRequestDTO.getEmail());
         if (userRepository.existsByEmail(registerRequestDTO.getEmail())) {
             throw new SystemException("User with this email already exists.", BAD_REQUEST);
         }
         try {
-            User user = new User();
-            user.setFirstName(registerRequestDTO.getFirstName());
-            user.setLastName(registerRequestDTO.getLastName());
-            user.setEmail(registerRequestDTO.getEmail());
-            user.setPassword(registerRequestDTO.getPassword());
-            user.setRole(Role.STUDENT);
+            User user = initializeUserInstance(registerRequestDTO);
             userRepository.save(user);
             oktaAuthService.register(registerRequestDTO);
             log.info("User registration successful for email {}", registerRequestDTO.getEmail());
@@ -55,7 +50,7 @@ public class ApplicationAuthenticationService {
         }
     }
 
-    public AuthResponse login(final LoginRequestDTO loginRequestDTO, final HttpServletRequest request) {
+    public AuthResponse login(LoginRequestDTO loginRequestDTO, HttpServletRequest request) {
         log.info("Attempting to login user with email {}", loginRequestDTO.getEmail());
         try {
             AuthResponse authResponse = authenticateAndSetContext(loginRequestDTO, request);
@@ -68,7 +63,7 @@ public class ApplicationAuthenticationService {
         }
     }
 
-    public AuthResponse refresh(final JWTTokenDTO jwtRefreshDTO, final HttpServletRequest request) {
+    public AuthResponse refresh(JWTTokenDTO jwtRefreshDTO, HttpServletRequest request) {
         log.info("Attempting to refresh JWT token for user with refresh token: {}",
                 jwtRefreshDTO.getToken());
         final String refreshToken = jwtRefreshDTO.getToken();
@@ -88,7 +83,7 @@ public class ApplicationAuthenticationService {
         }
     }
 
-    public void revoke(final JWTTokenDTO jwtToken) {
+    public void revoke(JWTTokenDTO jwtToken) {
         log.info("Attempting to revoke refresh token: {}", jwtToken);
         try {
             oktaAuthService.revokeAccessToken(jwtToken.getToken());
@@ -124,6 +119,16 @@ public class ApplicationAuthenticationService {
     private User findUserByEmailOrThrow(String email) {
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new SystemException("User not found in local database", UNAUTHORIZED));
+    }
+
+    private User initializeUserInstance(RegisterRequestDTO registerRequestDTO) {
+        User user = new User();
+        user.setFirstName(registerRequestDTO.getFirstName());
+        user.setLastName(registerRequestDTO.getLastName());
+        user.setEmail(registerRequestDTO.getEmail());
+        user.setPassword(registerRequestDTO.getPassword());
+        user.setRole(Role.STUDENT);
+        return user;
     }
 }
 
