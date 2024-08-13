@@ -59,13 +59,13 @@ public class HomeworkController {
 
     @PreAuthorize("hasAnyRole('INSTRUCTOR', 'ADMIN')")
     @GetMapping("/lessons/{lessonId}/students/{studentId}/homework/{homeworkId}")
-    public ResponseEntity<String> getMyHomework(
+    public ResponseEntity<String> getMyHomeworkLink(
             @PathVariable Long lessonId,
             @PathVariable Long studentId,
             @PathVariable String homeworkId) {
         log.info("GET Request to fetch homework file with id {} for user {}", homeworkId, studentId);
         return ResponseEntity.ok()
-                .body(homeworkService.getHomeworkFile(lessonId, studentId, homeworkId));
+                .body(homeworkService.getHomeworkFileTemporalLink(lessonId, studentId, homeworkId));
     }
 
     /**
@@ -100,6 +100,17 @@ public class HomeworkController {
         HomeworkResponseDTO homeworkDTO = homeworkService.uploadHomeworkFile(file, user.getId(), lessonId);
         return ResponseEntity.created(new URI("/api/v1/homeworks/" + homeworkDTO.getId()))
                 .body(homeworkDTO);
+    }
+
+
+    @PreAuthorize("hasAnyRole('INSTRUCTOR', 'ADMIN')")
+    @GetMapping("/homeworks/lesson/{lessonId}/student/{studentId}/{identifier}")
+    public byte[] getHomeworkFile(@PathVariable final Long lessonId,
+                                  @PathVariable final Long studentId,
+                                  @PathVariable final String identifier) {
+        log.debug("GET request to get a homework file for lesson id: {}, student id: {} and id : {}",
+                lessonId, studentId, identifier);
+        return homeworkService.getHomeworkFile(lessonId, studentId, identifier);
     }
 
     /**

@@ -3,7 +3,7 @@ name: Build and Deploy to Cloud Run
 on:
   workflow_dispatch:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "bucket-impl" ]
 
 env:
   PROJECT_ID: decisive-unison-430919-k4
@@ -59,10 +59,10 @@ jobs:
           --format json \
           --update-env-vars SERVICE_NAME="Learning center" \
           --update-secrets DB_DATABASE_NAME=DB_DATABASE_NAME:latest \
-          --update-secrets DB_USERNAME=DB_USERNAME:3 \
-          --update-secrets DB_PASSWORD=DB_PASSWORD:3 \
+          --update-secrets DB_USERNAME=DB_USERNAME:1 \
+          --update-secrets DB_PASSWORD=DB_PASSWORD:1 \
           --update-secrets DB_CLOUD_SQL_INSTANCE=DB_CLOUD_SQL_INSTANCE:1 \
-          --service-account learning-center-api-cloudrun@decisive-unison-430919-k4.iam.gserviceaccount.com \
+          --service-account 614416036074-compute@developer.gserviceaccount.com \
           --allow-unauthenticated
       - name: Show Output
         run: echo ${{ steps.deploy.outputs.url }}
