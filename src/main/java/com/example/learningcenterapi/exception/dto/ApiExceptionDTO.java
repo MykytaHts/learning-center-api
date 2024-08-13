@@ -6,12 +6,12 @@ import java.util.Map;
 
 @Data
 public class ApiExceptionDTO {
-    private String code;
+    private int code;
     private String message;
     private String stackTrace;
     private Map<String, Object> properties;
 
-    public ApiExceptionDTO code(final String code) {
+    public ApiExceptionDTO code(int code) {
         this.code = code;
         return this;
     }
