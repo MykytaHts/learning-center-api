@@ -7,10 +7,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 /**
- * Service Interface for managing {@link com.example.learningcenterapi.domain.Homework} entity.
+ * The HomeworkService interface provides methods to manage homework submissions.
  */
 public interface HomeworkService {
-
 
     /**
      * Retrieves the file link for the homework submission.
@@ -18,7 +17,7 @@ public interface HomeworkService {
      * @param lessonId   The ID of the lesson for the homework.
      * @param studentId  The ID of the student who submitted the homework.
      * @param identifier The identifier for the homework.
-     * @return The file link for the homework submission.
+     * @return The file link for the homework file.
      */
     String getHomeworkFileTemporalLink(Long lessonId, Long studentId, String identifier);
     /**
@@ -47,6 +46,14 @@ public interface HomeworkService {
     List<HomeworkResponseDTO> findByUserAndCourseId(Long id, Long courseId);
 
 
+    /**
+     * Retrieves the homework file as a byte array.
+     *
+     * @param lessonId   The ID of the lesson for the homework.
+     * @param studentId  The ID of the student who submitted the homework.
+     * @param identifier The identifier for the homework.
+     * @return The homework file as a byte array.
+     */
     byte[] getHomeworkFile(Long lessonId, Long studentId, String identifier);
 
     /**
@@ -69,7 +76,7 @@ public interface HomeworkService {
     HomeworkResponseDTO uploadHomeworkFile(MultipartFile file, Long studentId, Long lessonId);
 
     /**
-     * Deletes a homework by its ID.
+     * Deletes a homework and related file by its ID.
      *
      * @param homeworkId the ID of the homework to delete
      */

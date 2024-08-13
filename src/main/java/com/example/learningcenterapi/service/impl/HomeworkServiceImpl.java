@@ -10,6 +10,7 @@ import com.example.learningcenterapi.mapper.HomeworkMapper;
 import com.example.learningcenterapi.repository.HomeworkRepository;
 import com.example.learningcenterapi.repository.LessonRepository;
 import com.example.learningcenterapi.repository.StudentRepository;
+import com.example.learningcenterapi.service.BucketService;
 import com.example.learningcenterapi.service.HomeworkService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +22,8 @@ import java.io.IOException;
 import java.util.List;
 
 import static com.example.learningcenterapi.util.SystemValidator.checkNull;
-import static org.springframework.http.HttpStatus.*;
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 
 @Slf4j
