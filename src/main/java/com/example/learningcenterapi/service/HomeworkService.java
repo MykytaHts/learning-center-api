@@ -20,7 +20,7 @@ public interface HomeworkService {
      * @param identifier The identifier for the homework.
      * @return The file link for the homework submission.
      */
-    String getHomeworkFile(Long lessonId, Long studentId, String identifier);
+    String getHomeworkFileTemporalLink(Long lessonId, Long studentId, String identifier);
     /**
      * Finds all homework responses for a specific user.
      *
@@ -45,6 +45,9 @@ public interface HomeworkService {
      * @return A list of HomeworkResponseDTO objects representing the homework responses for the user for the course.
      */
     List<HomeworkResponseDTO> findByUserAndCourseId(Long id, Long courseId);
+
+
+    byte[] getHomeworkFile(Long lessonId, Long studentId, String identifier);
 
     /**
      * Updates a homework entry in the database with the specified homeworkId.
