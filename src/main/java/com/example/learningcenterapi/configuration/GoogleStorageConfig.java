@@ -4,19 +4,19 @@ import com.google.cloud.storage.Bucket;
 import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageOptions;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Slf4j
 @Configuration
 public class GoogleStorageConfig {
-
-
-    private final String homeworkBucketName = "bucketerria";
+    @Value("${gcp.bucket-name}")
+    private String bucketName;
 
     @Bean
-    public Bucket getHomeworkBucket(final Storage storage) {
-        return storage.get(homeworkBucketName, Storage.BucketGetOption.fields());
+    public Bucket getHomeworkBucket(Storage storage) {
+        return storage.get(bucketName, Storage.BucketGetOption.fields());
     }
 
     @Bean

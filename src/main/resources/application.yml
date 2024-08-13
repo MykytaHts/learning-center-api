@@ -12,21 +12,9 @@ idp:
     grant-type: password
     domain: https://trial-3347400.okta.com
     token: 0074Xwdf8Sy2ocovgtx_dT1GWtDgEI7Yhd1X6PQ48I
+gcp:
+  bucket-name: "bucketerria"
 spring:
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: https://trial-3347400.okta.com/oauth2/default
-      client:
-        registration:
-          okta:
-            client-id: 0oahotvh7k4Sf41BL697
-            client-secret: nuVBp8Pg9ddDeCV5aoTC9ZnflGScV668iSXYM1AlPGjrKfqkL26yQ1CHNXvP0_Em
-            scope: openid, profile, email, offline_access
-        provider:
-          okta:
-            issuer-uri: https://trial-3347400.okta.com/oauth2/default
   datasource:
     driver-class-name: org.postgresql.Driver
     username: ${DB_USERNAME:postgres}
