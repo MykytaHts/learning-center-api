@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SignUpRequestDTO {
+public class RegisterRequestDTO {
 
     @NotNull
     @Size(min = 2, max = 50)

@@ -1,10 +1,9 @@
-package com.example.learningcenterapi.security.service.impl;
+package com.example.learningcenterapi.security.validator;
 
 import com.example.learningcenterapi.domain.*;
 import com.example.learningcenterapi.exception.SystemException;
 import com.example.learningcenterapi.exception.UserAccessRestrictedException;
 import com.example.learningcenterapi.repository.*;
-import com.example.learningcenterapi.security.service.Validator;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.security.core.Authentication;

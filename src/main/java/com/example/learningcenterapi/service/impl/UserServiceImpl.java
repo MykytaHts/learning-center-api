@@ -49,6 +49,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(readOnly = true)
+    public User findByEmail(String email) {
+        log.debug("Finding user with email: {}", email);
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new SystemException("User with email: " + email + " not found.", NOT_FOUND));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public Page<UserResponseDTO> findAllInstructors(Pageable pageable) {
         log.debug("Finding all instructors");
         Page<Instructor> instructors = instructorRepository.findAll(pageable);

@@ -25,4 +25,7 @@ public class SystemException extends RuntimeException {
         super(cause);
     }
 
+    public SystemException(String message) {
+        super(message);
+    }
 }

@@ -23,6 +23,14 @@ public interface UserService {
     UserResponseDTO findById(Long id);
 
     /**
+     * Finds a user by their email.
+     *
+     * @param email The email of the user to find.
+     * @return The UserResponseDTO representing the found user, or null if no user was found.
+     */
+    User findByEmail(String email);
+
+    /**
      * Retrieves all the instructors.
      *
      * @return a list of UserResponseDTO objects representing the instructors

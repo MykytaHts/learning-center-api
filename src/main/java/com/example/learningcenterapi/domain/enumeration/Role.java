@@ -15,6 +15,6 @@ public enum Role {
     private final String title;
 
     public GrantedAuthority getAuthority() {
-        return new SimpleGrantedAuthority("ROLE_" + name() + "");
+        return new SimpleGrantedAuthority("ROLE_" + name());
     }
 }

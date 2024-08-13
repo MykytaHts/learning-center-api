@@ -1,4 +1,4 @@
-package com.example.learningcenterapi.security.service;
+package com.example.learningcenterapi.security.validator;
 
 
 import com.example.learningcenterapi.domain.User;

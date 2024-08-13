@@ -1,16 +1,41 @@
 server:
   port: 8080
 
+okta:
+  oauth2:
+    issuer: https://trial-3347400.okta.com/oauth2/default
+idp:
+  okta:
+    client-id: 0oahotvh7k4Sf41BL697
+    client-secret: nuVBp8Pg9ddDeCV5aoTC9ZnflGScV668iSXYM1AlPGjrKfqkL26yQ1CHNXvP0_Em
+    scope: openid profile email offline_access
+    grant-type: password
+    domain: https://trial-3347400.okta.com
+    token: 0074Xwdf8Sy2ocovgtx_dT1GWtDgEI7Yhd1X6PQ48I
 spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://trial-3347400.okta.com/oauth2/default
+      client:
+        registration:
+          okta:
+            client-id: 0oahotvh7k4Sf41BL697
+            client-secret: nuVBp8Pg9ddDeCV5aoTC9ZnflGScV668iSXYM1AlPGjrKfqkL26yQ1CHNXvP0_Em
+            scope: openid, profile, email, offline_access
+        provider:
+          okta:
+            issuer-uri: https://trial-3347400.okta.com/oauth2/default
   datasource:
     driver-class-name: org.postgresql.Driver
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
-    url: jdbc:postgresql:///${DB_DATABASE_NAME}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:admin}
+    url: jdbc:postgresql:///${DB_DATABASE_NAME:postgres}
     hikari:
       datasource-properties:
         socketFactory: com.google.cloud.sql.postgres.SocketFactory
-        cloudSqlInstance: ${DB_CLOUD_SQL_INSTANCE}
+        cloudSqlInstance: ${DB_CLOUD_SQL_INSTANCE:decisive-unison-430919-k4:europe-central2:learning-center-db}
         enableIamAuth: true
         sslmode: disable
   flyway:
@@ -25,8 +50,10 @@ spring:
   freemarker.cache: false
   thymeleaf.cache: false
   groovy.template.cache: false
-security:
-  jwt:
-    access-token-expiration: ${SECURITY_JWT_ACCESS_TOKEN_EXPIRATION:36000000}
-    refresh-token-expiration: ${SECURITY_JWT_REFRESH_TOKEN_EXPIRATION:864000000}
-    signing-key: ${SECURITY_JWT_SIGNING_KEY:24432646294A404E635266556A586E5A7234753778214125442A472D4B615064}
+#security:
+#  jwt:
+#    access-token-expiration: ${SECURITY_JWT_ACCESS_TOKEN_EXPIRATION:36000000}
+#    refresh-token-expiration: ${SECURITY_JWT_REFRESH_TOKEN_EXPIRATION:864000000}
+#    signing-key: ${SECURITY_JWT_SIGNING_KEY:24432646294A404E635266556A586E5A7234753778214125442A472D4B615064}
+#
+#
