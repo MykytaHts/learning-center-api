@@ -3,7 +3,6 @@ CREATE TABLE IF NOT EXISTS management.homeworks
     id            SERIAL constraint pk_homeworks primary key,
     student_id    INTEGER,
     lesson_id     INTEGER,
-    title         VARCHAR(255)  NOT NULL,
     file_path     VARCHAR(255) NOT NULL,
     created_date  timestamp    NOT NULL,
     modified_date timestamp    NOT NULL,
