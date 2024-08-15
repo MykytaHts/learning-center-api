@@ -8,5 +8,6 @@ CREATE TABLE IF NOT EXISTS management.users
     created_date  timestamp    NOT NULL,
     modified_date timestamp    NOT NULL,
     created_by    VARCHAR(50)  NOT NULL,
-    modified_by   VARCHAR(50)  NOT NULL
+    modified_by   VARCHAR(50)  NOT NULL,
+    constraint uq_users_email unique (email)
 );

@@ -7,5 +7,6 @@ CREATE TABLE IF NOT EXISTS management.courses
     created_date  timestamp    NOT NULL,
     modified_date timestamp    NOT NULL,
     created_by    VARCHAR(50)  NOT NULL,
-    modified_by   VARCHAR(50)  NOT NULL
+    modified_by   VARCHAR(50)  NOT NULL,
+    constraint uq_courses_title unique (title)
 );
