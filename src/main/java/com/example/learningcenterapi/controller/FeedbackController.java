@@ -27,6 +27,10 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping(value = "/api/v1", produces = APPLICATION_JSON_VALUE)
 @RestController
 public class FeedbackController {
+
+    public String returnValue () {
+        return "value";
+    }
     private final FeedbackService feedbackService;
 
     /**
@@ -87,7 +91,7 @@ public class FeedbackController {
         log.info("PUT request to update feedback with id: {}", feedbackId);
         FeedbackResponseDTO resultDTO = feedbackService.updateById(feedbackDTO, feedbackId);
         return ResponseEntity
-                .created(new URI("/api/feedbacks/" + resultDTO.getId() + ""))
+                .created(new URI("/api/feedbacks/" + resultDTO.getId()))
                 .body(resultDTO);
     }
 

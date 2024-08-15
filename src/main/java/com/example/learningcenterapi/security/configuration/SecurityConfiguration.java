@@ -16,7 +16,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.client.RestTemplate;
@@ -47,9 +46,6 @@ public class SecurityConfiguration {
                 .and()
                 .sessionManagement().sessionCreationPolicy(STATELESS)
                 .and()
-                .oauth2ResourceServer(oauth2 -> oauth2
-                    .jwt()
-                    .jwtAuthenticationConverter(jwtAuthenticationConverter()))
                 .addFilterBefore(new JWTAuthenticationFilter(jwtService, userDetailsService),
                     UsernamePasswordAuthenticationFilter.class);
         return http.build();
@@ -68,10 +64,20 @@ public class SecurityConfiguration {
                 .build();
     }
 
-    @Bean
-    public JwtAuthenticationConverter jwtAuthenticationConverter() {
-        return new JwtAuthenticationConverter();
-    }
+//    @Bean
+//    public JwtAuthenticationConverter jwtAuthenticationConverter() {
+//        return new JwtAuthenticationConverter();
+//    }
+
+//    @Bean
+//    public JwtAuthenticationConverter jwtAuthenticationConverter(UserDetailsService userDetailsService) {
+//        JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
+//        jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(jwt -> {
+//            UserDetails userDetails = userDetailsService.loadUserByUsername(jwt.getSubject());
+//            return new ArrayList<>(userDetails.getAuthorities());
+//        });
+//        return jwtAuthenticationConverter;
+//    }
 
     @Bean
     public UserDetailsService userDetailsService() {

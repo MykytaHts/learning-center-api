@@ -57,12 +57,17 @@ public class TestEvaluationServiceImpl implements TestEvaluationService {
         Test test = findTestById(testId);
         checkTestAvailability(test);
         checkValidResults(test, testResultDTO);
+        TestAttempt testAttempt = processResultsAndTestAttempt(testResultDTO, (Student) user, test);
+        return testAttemptMapper.toDTO(testAttemptRepository.save(testAttempt));
+    }
+
+    public TestAttempt processResultsAndTestAttempt(TestResultDTO testResultDTO, Student student, Test test) {
         double userScore = calculateUserScore(test, testResultDTO);
         int totalTestScore = getMaxScore(test.getQuestions());
-        double scorePercentage = userScore / totalTestScore * MAX_SCORE;
+        double scorePercentage = (userScore / totalTestScore) * MAX_SCORE;
         TestCompletionStatus completionStatus = getTestCompletionStatus(scorePercentage);
         log.info("User score: {}, total test score: {}, score percentage: {}", userScore, totalTestScore, scorePercentage);
-        return testAttemptMapper.toDTO(saveTestAttempt(test, (Student) user, scorePercentage, completionStatus));
+        return new TestAttempt(student, test, scorePercentage, completionStatus);
     }
 
     private double calculateUserScore(Test test, TestResultDTO testResultDTO) {
@@ -83,11 +88,6 @@ public class TestEvaluationServiceImpl implements TestEvaluationService {
                 .filter(Option::isCorrect)
                 .collect(toSet());
         return isCorrectAnswer(correctOptions, questionResult.getOptionIds()) ? scoreForRightAnswer : MIN_SCORE;
-    }
-
-    private TestAttempt saveTestAttempt(Test test, Student student, double testGrade, TestCompletionStatus completionStatus) {
-        TestAttempt testAttempt = new TestAttempt(student, test, testGrade, completionStatus);
-        return testAttemptRepository.save(testAttempt);
     }
 
     private TestCompletionStatus getTestCompletionStatus(double testGrade) {

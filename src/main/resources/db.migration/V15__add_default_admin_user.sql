@@ -10,4 +10,6 @@ INSERT INTO management.users
      created_by,
      modified_by
  )
-VALUES ('Mykyta','Lemberg','admin.phantom@courses.com','hekkoroid','ADMIN',CURRENT_DATE,CURRENT_DATE,'admin','admin')
+VALUES ('Mykyta','Lemberg','admin.phantoms@khm.com','hekkoroid','ADMIN',CURRENT_DATE,CURRENT_DATE,'admin','admin'),
+ ('Matizaa','Fikallia','student.phantoms@khm.com','hekkoroid','STUDENT',CURRENT_DATE,CURRENT_DATE,'admin','admin'),
+ ('Runitta','Rita','instructor.phantoms@khm.com','hekkoroid','INSTRUCTOR',CURRENT_DATE,CURRENT_DATE,'admin','admin')

@@ -1,7 +1,7 @@
 name: CI - Build Course API Backend
 
 on:
-  pull_request:
+  push:
     branches:
       - "main"
 
@@ -15,5 +15,5 @@ jobs:
           distribution: 'temurin'
           java-version: 17
           cache: maven
-      - name: Unit/Integration tests with Maven
+      - name: Unit/Integration/e2e tests with Maven
         run: mvn -ntp -B verify

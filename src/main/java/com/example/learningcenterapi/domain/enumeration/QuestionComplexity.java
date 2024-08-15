@@ -9,7 +9,7 @@ import java.util.Arrays;
 @Getter
 public enum QuestionComplexity {
     LOW(1, 1),
-    MIDDLE(2, 2),
+    MEDIUM(2, 2),
     HARD(3, 3);
 
     private final int index;

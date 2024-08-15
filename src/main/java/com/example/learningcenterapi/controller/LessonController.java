@@ -3,7 +3,6 @@ package com.example.learningcenterapi.controller;
 
 import com.example.learningcenterapi.dto.request.LessonRequestDTO;
 import com.example.learningcenterapi.dto.request.update.CourseUpdateDTO;
-import com.example.learningcenterapi.dto.response.CourseResponseDTO;
 import com.example.learningcenterapi.dto.response.LessonResponseDTO;
 import com.example.learningcenterapi.dto.response.minimized.LessonMinimizedDTO;
 import com.example.learningcenterapi.service.LessonService;
@@ -38,7 +37,7 @@ public class LessonController {
      * @return A list of LessonResponseDTO objects representing the lessons found.
      */
     @PreAuthorize("@accessValidator.lessonAccessByCourseId(#courseId)")
-    @GetMapping("/course/{courseId}/lessons")
+    @GetMapping("/courses/{courseId}/lessons")
     public List<LessonMinimizedDTO> getAllLessonsForCourse(@PathVariable Long courseId) {
         log.info("GET: Getting all Lessons.");
         return lessonService.findAllLessonsByCourseId(courseId);
@@ -101,7 +100,7 @@ public class LessonController {
      */
     @PreAuthorize("@accessValidator.modificationLessonAccessByCourseId(#courseId)")
     @PutMapping("/courses/{courseId}/lessons")
-    public ResponseEntity<CourseResponseDTO> updateLessonsForCourse(
+    public ResponseEntity<Void> updateLessonsForCourse(
             @RequestBody @Valid CourseUpdateDTO lessons, @PathVariable Long courseId) {
         log.info("PUT Request to update lessons for course with id: {}", courseId);
         lessonService.updateLessonsForCourse(lessons, courseId);

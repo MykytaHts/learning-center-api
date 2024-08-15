@@ -97,7 +97,6 @@ public class ApplicationAuthenticationService {
     private AuthResponse authenticateAndSetContext(LoginRequestDTO loginRequestDTO, HttpServletRequest request) {
         AuthResponse authResponse = oktaAuthService.authenticate(loginRequestDTO);
         validateAuthResponse(authResponse);
-
         User user = findUserByEmailOrThrow(loginRequestDTO.getEmail());
         setAuthenticationContext(user, request);
         return authResponse;
