@@ -62,6 +62,12 @@ jobs:
           --update-secrets DB_USERNAME=DB_USERNAME:1 \
           --update-secrets DB_PASSWORD=DB_PASSWORD:1 \
           --update-secrets DB_CLOUD_SQL_INSTANCE=DB_CLOUD_SQL_INSTANCE:1 \
+          --update-secrets OKTA_CLIENT_ID=OKTA_CLIENT_ID:1 \
+          --update-secrets OKTA_CLIENT_SECRET=OKTA_CLIENT_SECRET:1 \
+          --update-secrets OKTA_SCOPE=OKTA_SCOPE:1 \
+          --update-secrets GRANT_TYPE=GRANT_TYPE:1 \
+          --update-secrets OKTA_ORG_DOMAIN=OKTA_ORG_DOMAIN:1 \
+          --update-secrets OKTA_TOKEN=OKTA_TOKEN:1 \
           --service-account 614416036074-compute@developer.gserviceaccount.com \
           --allow-unauthenticated
       - name: Show Output
