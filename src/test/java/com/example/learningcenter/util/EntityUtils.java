@@ -11,7 +11,6 @@ public class EntityUtils {
         student.setEmail("student@example.com");
         student.setFirstName("John");
         student.setLastName("Doe");
-        student.setPassword("SuperSecuredPassword");
         student.setRole(Role.STUDENT);
         return student;
     }

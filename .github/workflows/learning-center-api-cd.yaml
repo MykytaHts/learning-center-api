@@ -3,8 +3,7 @@ name: Build and Deploy to Cloud Run
 on:
   workflow_dispatch:
   push:
-    branches: [ "bucket-impl" ]
-#    branches: [ "main", "bucket-impl" ]
+    branches: [ "main" ]
 
 env:
   PROJECT_ID: decisive-unison-430919-k4

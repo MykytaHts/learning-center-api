@@ -35,7 +35,6 @@ public class CustomMockStudentSecurityContextFactory implements WithSecurityCont
         student.setFirstName("Super");
         student.setLastName("Student");
         student.setEmail("super.student@gmail.com");
-        student.setPassword("$2a$12$icb9BIES3BgjXkHv1V2acu4YPcYJGNUVwjg2gZtyuSDVO4bQ");
         student.setRole(Role.STUDENT);
         return student;
     }

@@ -125,7 +125,6 @@ public class ApplicationAuthenticationService {
         user.setFirstName(registerRequestDTO.getFirstName());
         user.setLastName(registerRequestDTO.getLastName());
         user.setEmail(registerRequestDTO.getEmail());
-        user.setPassword(registerRequestDTO.getPassword());
         user.setRole(Role.STUDENT);
         return user;
     }

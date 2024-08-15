@@ -64,21 +64,6 @@ public class SecurityConfiguration {
                 .build();
     }
 
-//    @Bean
-//    public JwtAuthenticationConverter jwtAuthenticationConverter() {
-//        return new JwtAuthenticationConverter();
-//    }
-
-//    @Bean
-//    public JwtAuthenticationConverter jwtAuthenticationConverter(UserDetailsService userDetailsService) {
-//        JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
-//        jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(jwt -> {
-//            UserDetails userDetails = userDetailsService.loadUserByUsername(jwt.getSubject());
-//            return new ArrayList<>(userDetails.getAuthorities());
-//        });
-//        return jwtAuthenticationConverter;
-//    }
-
     @Bean
     public UserDetailsService userDetailsService() {
         return email -> userRepository.findByEmail(email).orElseThrow(() ->

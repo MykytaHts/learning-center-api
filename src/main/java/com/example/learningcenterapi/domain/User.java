@@ -50,9 +50,6 @@ public class User extends BaseEntity implements UserDetails {
     @Column(unique = true, updatable = false)
     private String email;
 
-    @NotBlank
-    private String password;
-
     @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
@@ -86,5 +83,10 @@ public class User extends BaseEntity implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singleton(this.role.getAuthority());
+    }
+
+    @Override
+    public String getPassword() {
+        return null;
     }
 }
