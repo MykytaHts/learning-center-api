@@ -93,7 +93,7 @@ public class HomeworkController {
     @PreAuthorize("hasRole('STUDENT')")
     @PostMapping("/lessons/{lessonId}/homeworks")
     public ResponseEntity<HomeworkResponseDTO> submitHomework(
-            @Valid MultipartFile file,
+            @RequestParam @Valid MultipartFile file,
             @PathVariable Long lessonId,
             @AuthenticationPrincipal User user) throws URISyntaxException {
         log.info("POST Request to submit homework for lesson with id {}", lessonId);
@@ -105,9 +105,9 @@ public class HomeworkController {
 
     @PreAuthorize("hasAnyRole('INSTRUCTOR', 'ADMIN')")
     @GetMapping("/homeworks/lesson/{lessonId}/student/{studentId}/{identifier}")
-    public byte[] getHomeworkFile(@PathVariable final Long lessonId,
-                                  @PathVariable final Long studentId,
-                                  @PathVariable final String identifier) {
+    public byte[] getHomeworkFile(@PathVariable Long lessonId,
+                                  @PathVariable Long studentId,
+                                  @PathVariable String identifier) {
         log.debug("GET request to get a homework file for lesson id: {}, student id: {} and id : {}",
                 lessonId, studentId, identifier);
         return homeworkService.getHomeworkFile(lessonId, studentId, identifier);
