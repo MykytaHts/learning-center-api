@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS management.feedbacks
 (
-    id SERIAL constraint pk_feedbacks primary key,
+    id                 SERIAL constraint pk_feedbacks primary key,
     student_id         INTEGER,
     course_id          INTEGER,
     feedback           VARCHAR(255) NOT NULL,

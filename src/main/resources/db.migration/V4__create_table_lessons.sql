@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS management.lessons
 (
-    id     SERIAL constraint pk_lessons primary key,
+    id            SERIAL constraint pk_lessons primary key,
     title         VARCHAR(255) NOT NULL,
     content       TEXT         NOT NULL,
     order_index   INTEGER,

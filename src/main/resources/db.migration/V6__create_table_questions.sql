@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS management.questions
     id              SERIAL constraint pk_questions primary key,
     description     VARCHAR(255),
     order_index     INTEGER      NOT NULL,
-    test_id       INTEGER      NOT NULL,
+    test_id         INTEGER      NOT NULL,
     question_complexity INTEGER      NOT NULL,
     question_type   INTEGER      NOT NULL,
     created_date    timestamp    NOT NULL,

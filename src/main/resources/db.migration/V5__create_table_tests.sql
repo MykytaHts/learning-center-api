@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS management.tests
 (
-    id     SERIAL constraint pk_tests primary key,
+    id            SERIAL constraint pk_tests primary key,
     title         VARCHAR(255) NOT NULL,
     description   VARCHAR(255) NOT NULL,
     available     BOOLEAN      NOT NULL DEFAULT FALSE,
